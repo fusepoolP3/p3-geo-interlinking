@@ -4,7 +4,7 @@
   <groupId>eu.fusepoolp3</groupId>
   <artifactId>silkdeduplication</artifactId>
   <version>0.1-SNAPSHOT</version>
-  <name>Fusepool P3 Deduplication</name>
+  <name>Fusepool P3 GEO Interlinking</name>
   <packaging>pom</packaging>
   <description>
   A service to deduplicate entities within a RDF graphs. The extractor receives
