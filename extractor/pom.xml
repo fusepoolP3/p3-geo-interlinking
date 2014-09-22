@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>eu.fusepoolp3</groupId>
-    <artifactId>silkdeduplication</artifactId>
-    <version>0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>extractor</artifactId>
-  <name>Fusepool P3 Duplicates Extractor</name>
-  <dependencies>
-       <dependency>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>eu.fusepoolp3</groupId>
+        <artifactId>silkdeduplication</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>extractor</artifactId>
+    <name>Fusepool P3 Duplicates Extractor</name>
+    <dependencies>
+        <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
             <version>9.2.0.RC0</version>
@@ -17,8 +17,7 @@
             <groupId>org.apache.clerezza</groupId>
             <artifactId>rdf.jena.parser</artifactId>
             <version>0.12</version>
-            <!-- only in tests and only at runtime -->
-            <scope>test</scope>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <artifactId>wymiwyg-commons-core</artifactId>
@@ -48,15 +47,10 @@
             <version>1.0.0</version>
         </dependency>
         <dependency>
-           <groupId>eu.fusepoolp3</groupId>
-           <artifactId>silk</artifactId>
-           <version>0.1-SNAPSHOT</version>
+            <groupId>eu.fusepoolp3</groupId>
+            <artifactId>silk</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
-		<dependency>
-			<groupId>de.fuberlin.wiwiss.silk</groupId>
-			<artifactId>silk</artifactId>
-			<version>2.6.0</version>
-		</dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
@@ -69,72 +63,62 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-  <build>
-    <plugins>
-       <plugin>
-           <groupId>org.apache.maven.plugins</groupId>
-           <artifactId>maven-jar-plugin</artifactId>
-           <configuration>
-                <archive>
-                    <manifest>
-                        <addClasspath>true</addClasspath>
-                        <mainClass>${main.class}</mainClass>
-                    </manifest>
-                </archive>
-           </configuration>
-       </plugin>
-       <plugin>
-           <groupId>org.codehaus.mojo</groupId>
-           <artifactId>exec-maven-plugin</artifactId>
-           <version>1.3</version>
-           <configuration>
-               <mainClass>${main.class}</mainClass>
-                  <arguments>
-                      <argument>-P</argument>
-                      <argument>7100</argument>
-                  </arguments>
-           </configuration>
-       </plugin>
-       <plugin>
-           <groupId>org.apache.maven.plugins</groupId>
-           <artifactId>maven-assembly-plugin</artifactId>
-           <executions>
-             <execution>
-                   <goals>
-                      <goal>attached</goal>
-                   </goals>
-                   <phase>package</phase>
-                   <configuration>
-                     <descriptorRefs>
-                       <descriptorRef>jar-with-dependencies</descriptorRef>
-                     </descriptorRefs>
-                     <archive>
-                       <manifest>
-                          <mainClass>${main.class}</mainClass>
-                       </manifest>
-                     </archive>
-                   </configuration>
-             </execution>
-           </executions>
-       </plugin>
-       <plugin>
-          <groupId>org.eclipse.jetty</groupId>
-          <artifactId>jetty-maven-plugin</artifactId>
-          <version>9.2.0.RC0</version>
-       </plugin>
-    </plugins>
-  </build>
-  <repositories>
-        <repository>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>apache.snapshots</id>
-            <name>Apache Snapshot Repository</name>
-            <url>http://repository.apache.org/snapshots</url>
-        </repository>
-  </repositories>
-  <properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>${main.class}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.3</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                    <arguments>
+                        <argument>-P</argument>
+                        <argument>7100</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifest>
+                                    <mainClass>${main.class}</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.0.RC0</version>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>

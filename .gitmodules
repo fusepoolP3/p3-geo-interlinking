@@ -1,0 +1,3 @@
+[submodule "silk"]
+	path = silk
+	url = git://git.assembla.com/silk.git

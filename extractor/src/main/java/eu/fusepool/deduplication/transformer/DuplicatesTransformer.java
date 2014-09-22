@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package eu.fusepool.deduplication.transformer;
 
-import de.fuberlin.wiwiss.silk.config.LinkingConfig;
 import eu.fusepool.deduplication.utm2wgs84.RdfCoordinatesConverter;
 import eu.fusepool.p3.transformer.HttpRequestEntity;
 import eu.fusepool.p3.transformer.RdfGeneratingTransformer;
@@ -29,31 +27,25 @@ import org.apache.clerezza.rdf.core.MGraph;
 import org.apache.clerezza.rdf.core.Triple;
 import org.apache.clerezza.rdf.core.TripleCollection;
 import org.apache.clerezza.rdf.core.UriRef;
-import org.apache.clerezza.rdf.core.access.LockableMGraph;
-import org.apache.clerezza.rdf.core.access.TcManager;
-import org.apache.clerezza.rdf.core.impl.SimpleGraph;
 import org.apache.clerezza.rdf.core.impl.SimpleMGraph;
 import org.apache.clerezza.rdf.core.impl.TripleImpl;
-import org.apache.clerezza.rdf.core.serializedform.ParsingProvider;
-import org.apache.clerezza.rdf.core.serializedform.SerializingProvider;
+import org.apache.clerezza.rdf.core.serializedform.Parser;
 import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
-import org.apache.clerezza.rdf.jena.parser.JenaParserProvider;
 import org.apache.clerezza.rdf.ontologies.OWL;
 import org.apache.clerezza.rdf.utils.smushing.SameAsSmusher;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class DuplicatesTransformer extends RdfGeneratingTransformer {
-	//final String SILK_CONFIG_FILE = "src/main/resources/silk-config-file.xml";
-	final String SILK_CONFIG_FILE = "src/main/resources/silk-config-spatial.xml";
-	final String INPUT_RDF_FILE = "src/main/resources/inputdata.rdf";
-	final String OUTPUT_RDF_FILE = "src/main/resources/outputdata.rdf";
-	final String SILK_RESULT_FILE = "src/main/resources/accepted_links.nt";
-	final String BASE_URI = "http://example.org/";
-	
-	private static final Logger log = LoggerFactory.getLogger(DuplicatesTransformer.class);
+
+    //final String SILK_CONFIG_FILE = "src/main/resources/silk-config-file.xml";
+    final String SILK_CONFIG_FILE = "src/main/resources/silk-config-spatial.xml";
+    final String INPUT_RDF_FILE = "src/main/resources/inputdata.rdf";
+    final String OUTPUT_RDF_FILE = "src/main/resources/outputdata.rdf";
+    final String SILK_RESULT_FILE = "src/main/resources/accepted_links.nt";
+    final String BASE_URI = "http://example.org/";
+
+    private static final Logger log = LoggerFactory.getLogger(DuplicatesTransformer.class);
 
     @Override
     public Set<MimeType> getSupportedInputFormats() {
@@ -64,106 +56,114 @@ public class DuplicatesTransformer extends RdfGeneratingTransformer {
             throw new RuntimeException(ex);
         }
     }
-    
+
     @Override
-	protected TripleCollection generateRdf(HttpRequestEntity entity) throws IOException {
-    	final InputStream inputRdfData = entity.getData();
-    	TripleCollection duplicates = findDuplicates(inputRdfData);
-		return duplicates;
-	}
+    protected TripleCollection generateRdf(HttpRequestEntity entity) throws IOException {
+        final InputStream inputRdfData = entity.getData();
+        TripleCollection duplicates = findDuplicates(inputRdfData);
+        return duplicates;
+    }
 
     protected TripleCollection findDuplicates(InputStream inputRdf) throws IOException {
         File configFile = new File(SILK_CONFIG_FILE);
         // convert utm coordinates in wgs84
         RdfCoordinatesConverter converter = new RdfCoordinatesConverter();
         File rdfFile = new File(INPUT_RDF_FILE);
-        FileOutputStream outRdf = new FileOutputStream(rdfFile); 
+        FileOutputStream outRdf = new FileOutputStream(rdfFile);
         converter.utm2wgs84(inputRdf, outRdf);
         log.info("Finished conversion in WGS84");
-        
+
         // interlink entities
         Silk.executeFile(configFile, null, 1, true);
         log.info("Finished Silk Task");
         //----start test code
         /*
-        MGraph inputGraph = new SimpleMGraph();
-    	ParsingProvider parser = new JenaParserProvider();
-    	parser.parse(inputGraph, inputRdf, SupportedFormat.TURTLE, null);
-        Silk.executeTripleCollection(inputGraph);
-        */
+         MGraph inputGraph = new SimpleMGraph();
+         ParsingProvider parser = new JenaParserProvider();
+         parser.parse(inputGraph, inputRdf, SupportedFormat.TURTLE, null);
+         Silk.executeTripleCollection(inputGraph);
+         */
         //---end test code
-        
+
         // returns the result to the client
         return parseResult(SILK_RESULT_FILE);
     }
+
     /**
-     * Smushes the input RDF graph using the of equivalent links. Returns the same graph replacing all the equivalent 
-     * URIs with a preferred one adding all the statements to it.
+     * Smushes the input RDF graph using the of equivalent links. Returns the
+     * same graph replacing all the equivalent URIs with a preferred one adding
+     * all the statements to it.
+     *
      * @param inputRdfData
      * @param duplicates
      * @return
      */
-    protected TripleCollection smushData(InputStream inputRdfData, TripleCollection duplicates){
-    	MGraph inputGraph = new SimpleMGraph();
-    	ParsingProvider parser = new JenaParserProvider();
-    	parser.parse(inputGraph, inputRdfData, SupportedFormat.TURTLE, null);
-    	SameAsSmusher smusher = new SameAsSmusher() {
-    		@Override 
-    		protected UriRef getPreferedIri(Set<UriRef> uriRefs) {
-    			UriRef preferedIri = null;
-    			Set<UriRef> canonUris = new HashSet<UriRef>();
-    			for(UriRef uriRef: uriRefs) {
-    				if(uriRef.getUnicodeString().startsWith(BASE_URI))
-    					canonUris.add(uriRef);
-    			}
-    			if(canonUris.size() > 0)
-    				preferedIri = canonUris.iterator().next();
-    			if(canonUris.size() == 0)
-    				preferedIri = uriRefs.iterator().next();
-    			return preferedIri;
-    		}
-    	};
-    	
-    	//smusher.smush(inputGraph, duplicates, true); //remove the use of a LockableMGraph
-    	return inputGraph; 
+    protected TripleCollection smushData(InputStream inputRdfData, TripleCollection duplicates) {
+        MGraph inputGraph = new SimpleMGraph();
+        Parser parser = Parser.getInstance();
+        parser.parse(inputGraph, inputRdfData, SupportedFormat.TURTLE, null);
+        SameAsSmusher smusher = new SameAsSmusher() {
+            @Override
+            protected UriRef getPreferedIri(Set<UriRef> uriRefs) {
+                UriRef preferedIri = null;
+                Set<UriRef> canonUris = new HashSet<UriRef>();
+                for (UriRef uriRef : uriRefs) {
+                    if (uriRef.getUnicodeString().startsWith(BASE_URI)) {
+                        canonUris.add(uriRef);
+                    }
+                }
+                if (canonUris.size() > 0) {
+                    preferedIri = canonUris.iterator().next();
+                }
+                if (canonUris.size() == 0) {
+                    preferedIri = uriRefs.iterator().next();
+                }
+                return preferedIri;
+            }
+        };
+
+        //smusher.smush(inputGraph, duplicates, true); //remove the use of a LockableMGraph
+        return inputGraph;
     }
+
     /**
-     * Reads the silk output (n-triples) and returns the owl:sameas statements as a result
+     * Reads the silk output (n-triples) and returns the owl:sameas statements
+     * as a result
+     *
      * @param fileName
      * @return
      * @throws IOException
      */
     public TripleCollection parseResult(String fileName) throws IOException {
-    	final TripleCollection links = new SimpleMGraph();
-    	BufferedReader in = new BufferedReader(new FileReader(fileName));
-    	String statement;
-    	while((statement = in.readLine())!= null){
-    		Triple link = new TripleImpl(getSubject(statement),OWL.sameAs,getObject(statement));
-    		links.add(link);
-    	}
-    	in.close();
-    	return links;
+        final TripleCollection links = new SimpleMGraph();
+        BufferedReader in = new BufferedReader(new FileReader(fileName));
+        String statement;
+        while ((statement = in.readLine()) != null) {
+            Triple link = new TripleImpl(getSubject(statement), OWL.sameAs, getObject(statement));
+            links.add(link);
+        }
+        in.close();
+        return links;
     }
-    
-    public UriRef getSubject(String statement){
-    	int endOfSubjectIndex = statement.indexOf('>');
-    	String subjectName = statement.substring(1, endOfSubjectIndex);
-    	UriRef subjectRef = new UriRef(subjectName);
-    	return subjectRef;
-    }
-    
-    public UriRef getObject(String statement) {
-    	int startOfObjectIndex = statement.lastIndexOf('<');
-    	String objectName = statement.substring(startOfObjectIndex + 1, statement.length() - 1);
-    	UriRef objectRef = new UriRef(objectName);
-    	return objectRef;
-    }
-	
-	@Override
-	public boolean isLongRunning() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-    
+    public UriRef getSubject(String statement) {
+        int endOfSubjectIndex = statement.indexOf('>');
+        String subjectName = statement.substring(1, endOfSubjectIndex);
+        UriRef subjectRef = new UriRef(subjectName);
+        return subjectRef;
+    }
+
+    public UriRef getObject(String statement) {
+        int startOfObjectIndex = statement.lastIndexOf('<');
+        String objectName = statement.substring(startOfObjectIndex + 1, statement.length() - 1);
+        UriRef objectRef = new UriRef(objectName);
+        return objectRef;
+    }
+
+    @Override
+    public boolean isLongRunning() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

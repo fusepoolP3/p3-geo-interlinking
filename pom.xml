@@ -11,6 +11,7 @@
    an RDF graph as input and returns a set of owl:sameAs statement if similar entities are found.
   </description>
   <modules>
+    <module>silk/silk2</module>
     <module>extractor</module>
     <module>silk-decorator</module>
   </modules>
