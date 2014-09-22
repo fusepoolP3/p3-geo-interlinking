@@ -48,7 +48,7 @@
         </dependency>
         <dependency>
             <groupId>eu.fusepoolp3</groupId>
-            <artifactId>silk</artifactId>
+            <artifactId>silk-decorator</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
