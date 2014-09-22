@@ -8,7 +8,7 @@ package eu.fusepool.deduplication.transformer;
 import eu.fusepool.deduplication.utm2wgs84.RdfCoordinatesConverter;
 import eu.fusepool.p3.transformer.HttpRequestEntity;
 import eu.fusepool.p3.transformer.RdfGeneratingTransformer;
-import eu.fusepool.silk.Silk;
+import de.fuberlin.wiwiss.silk.Silk;
 
 import java.io.BufferedReader;
 import java.io.File;

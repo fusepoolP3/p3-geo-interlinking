@@ -12,6 +12,5 @@
   <modules>
     <module>silk/silk2</module>
     <module>extractor</module>
-    <module>silk-decorator</module>
   </modules>
 </project>
