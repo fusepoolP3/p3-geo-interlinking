@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>eu.fusepoolp3</groupId>
-        <artifactId>silkdeduplication</artifactId>
+        <artifactId>p3-geo-interlinking</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
     <artifactId>extractor</artifactId>
