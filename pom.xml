@@ -12,6 +12,6 @@
   </description>
   <modules>
     <module>extractor</module>
-    <module>silk</module>
+    <module>silk-decorator</module>
   </modules>
 </project>
