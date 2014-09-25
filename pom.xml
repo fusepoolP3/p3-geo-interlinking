@@ -44,7 +44,7 @@
         <dependency>
             <groupId>eu.fusepool.p3</groupId>
             <artifactId>transformer-implementation-library</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
            <groupId>eu.fusepool.p3.ext.de.fuberlin.wiwiss.silk</groupId>
@@ -115,6 +115,15 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.2.0.RC0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
