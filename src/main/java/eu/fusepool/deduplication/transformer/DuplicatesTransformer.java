@@ -5,6 +5,8 @@
  */
 package eu.fusepool.deduplication.transformer;
 
+import eu.fusepool.deduplication.transformer.SilkConfigFileParser;
+import eu.fusepool.deduplication.transformer.FileUtil;
 import eu.fusepool.deduplication.utm2wgs84.RdfCoordinatesConverter;
 import eu.fusepool.p3.transformer.HttpRequestEntity;
 import eu.fusepool.p3.transformer.RdfGeneratingTransformer;
@@ -33,17 +35,17 @@ import org.apache.clerezza.rdf.core.serializedform.Parser;
 import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
 import org.apache.clerezza.rdf.ontologies.OWL;
 import org.apache.clerezza.rdf.utils.smushing.SameAsSmusher;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DuplicatesTransformer extends RdfGeneratingTransformer {
 
-    //final String SILK_CONFIG_FILE = "src/main/resources/silk-config-file.xml";
-    final String SILK_CONFIG_FILE = "src/main/resources/silk-config-spatial.xml";
-    final String INPUT_RDF_FILE = "src/main/resources/inputdata.rdf";
-    final String OUTPUT_RDF_FILE = "src/main/resources/outputdata.rdf";
+    //final String INPUT_RDF_FILE = "src/main/resources/inputdata.rdf";
+    //final String OUTPUT_RDF_FILE = "src/main/resources/outputdata.rdf";
     final String SILK_RESULT_FILE = "src/main/resources/accepted_links.nt";
     final String BASE_URI = "http://example.org/";
+    //private String configFileName = null;
 
     private static final Logger log = LoggerFactory.getLogger(DuplicatesTransformer.class);
 
@@ -65,13 +67,22 @@ public class DuplicatesTransformer extends RdfGeneratingTransformer {
     }
 
     protected TripleCollection findDuplicates(InputStream inputRdf) throws IOException {
-        File configFile = new File(SILK_CONFIG_FILE);
-        // convert utm coordinates in wgs84
+    	File configFile = FileUtil.inputStreamToFile(getClass().getResourceAsStream("silk-config-spatial.xml"));
+        File inputRdfFile = File.createTempFile("input-", ".ttl");
+        File wgs84File = File.createTempFile("wgs84-", ".ttl");
+        File outFile = File.createTempFile("output-", ".nt");
+               
+        // convert utm coordinates in wgs84 and save the data in a temp file
+        FileOutputStream convStream = new FileOutputStream(wgs84File);
         RdfCoordinatesConverter converter = new RdfCoordinatesConverter();
-        File rdfFile = new File(INPUT_RDF_FILE);
-        FileOutputStream outRdf = new FileOutputStream(rdfFile);
-        converter.utm2wgs84(inputRdf, outRdf);
+        converter.utm2wgs84(inputRdf, convStream);
         log.info("Finished conversion in WGS84");
+        
+        //update the silk config file with the paths of the target source and output files
+        SilkConfigFileParser parser = new SilkConfigFileParser(configFile.getAbsolutePath());
+        parser.updateSourceFile(wgs84File.getAbsolutePath());
+        parser.updateOutputFile(outFile.getAbsolutePath());
+		parser.saveChanges();
 
         // interlink entities
         Silk.executeFile(configFile, null, 1, true);

@@ -26,6 +26,7 @@ import org.wymiwyg.commons.util.arguments.ArgumentHandler;
  * @author reto
  */
 public class Main {
+	
     public static void main(String[] args) throws Exception {
         Arguments arguments = ArgumentHandler.readArguments(Arguments.class, args);
         if (arguments != null) {
@@ -35,11 +36,7 @@ public class Main {
 
     private static void start(Arguments arguments) throws Exception {
         TransformerServer server = new TransformerServer(arguments.getPort());
-        //alternatives:
         server.start(new DuplicatesTransformer());
-        //server.start(new LongRunningExtractor());
-        //server.start(new LongRunningExtractor());
-        //server.start(new SimpleAsyncExtractor());
         server.join();
     }
 }
