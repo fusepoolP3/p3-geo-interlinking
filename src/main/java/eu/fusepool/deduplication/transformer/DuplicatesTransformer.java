@@ -12,11 +12,9 @@ import eu.fusepool.p3.transformer.HttpRequestEntity;
 import eu.fusepool.p3.transformer.RdfGeneratingTransformer;
 import de.fuberlin.wiwiss.silk.Silk;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
@@ -27,14 +25,11 @@ import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 
 import org.apache.clerezza.rdf.core.MGraph;
-import org.apache.clerezza.rdf.core.Triple;
 import org.apache.clerezza.rdf.core.TripleCollection;
 import org.apache.clerezza.rdf.core.UriRef;
 import org.apache.clerezza.rdf.core.impl.SimpleMGraph;
-import org.apache.clerezza.rdf.core.impl.TripleImpl;
 import org.apache.clerezza.rdf.core.serializedform.Parser;
 import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
-import org.apache.clerezza.rdf.ontologies.OWL;
 import org.apache.clerezza.rdf.utils.smushing.SameAsSmusher;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -148,20 +143,6 @@ public class DuplicatesTransformer extends RdfGeneratingTransformer {
     public TripleCollection parseResult(String fileName) throws IOException {
     	Parser parser = Parser.getInstance();
         return parser.parse(new FileInputStream(fileName), SupportedFormat.N_TRIPLE);
-    }
-
-    public UriRef getSubject(String statement) {
-        int endOfSubjectIndex = statement.indexOf('>');
-        String subjectName = statement.substring(1, endOfSubjectIndex);
-        UriRef subjectRef = new UriRef(subjectName);
-        return subjectRef;
-    }
-
-    public UriRef getObject(String statement) {
-        int startOfObjectIndex = statement.lastIndexOf('<');
-        String objectName = statement.substring(startOfObjectIndex + 1, statement.length() - 1);
-        UriRef objectRef = new UriRef(objectName);
-        return objectRef;
     }
 
     @Override
