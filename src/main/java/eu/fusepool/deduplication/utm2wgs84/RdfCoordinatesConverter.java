@@ -1,6 +1,7 @@
 package eu.fusepool.deduplication.utm2wgs84;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,12 +27,11 @@ import com.hp.hpl.jena.util.PrintUtil;
 public class RdfCoordinatesConverter {
 	
 	
-	public void utm2wgs84(InputStream in, OutputStream out) throws FileNotFoundException {
+	public void utm2wgs84(File inputFile, OutputStream out) throws FileNotFoundException {
 		
 		// load the data in a model
 		Model model = ModelFactory.createDefaultModel();
-		model.read(in, null);
-		
+		model.read(inputFile.getAbsolutePath(), null);
 		RdfCoordinatesConverter converter = new RdfCoordinatesConverter();
 		// Gets the first vertice of each polygon
 		HashMap<String,String> firstPointMap = converter.getFirstPointList(model);
@@ -39,9 +39,8 @@ public class RdfCoordinatesConverter {
 		HashMap<String,WGS84Point> wgs84Map = converter.convertToWGS84(firstPointMap);
 		// Enrich the model with wgs84:lat and wgs84:long properties
 		Model enrichedModel = converter.enrichModel(model, wgs84Map);
-		
 		//PrintWriter writer = new PrintWriter(outputRdfFileName);
-		enrichedModel.write(out);
+		enrichedModel.write(out, "TURTLE");
 		
 	}
 	
@@ -79,20 +78,23 @@ public class RdfCoordinatesConverter {
 	 * @return
 	 */
 	protected HashMap<String,WGS84Point> convertToWGS84(HashMap<String,String> utmPointMap){
-		HashMap<String,WGS84Point> wgs84pointMap = new HashMap<String,WGS84Point>();
+		HashMap<String,WGS84Point> wgs84pointMap = null;
 		CoordinateConversion converter = new CoordinateConversion();
-		Set subjectUriSet = utmPointMap.keySet();
-		Iterator<String> iutmPoint = subjectUriSet.iterator();
-		while(iutmPoint.hasNext()) {	
-			String subjectUri = iutmPoint.next();
-			String utm = utmPointMap.get(subjectUri);
-			double latlng [] = converter.utm2LatLon( utm );
-			WGS84Point wgs84 = new WGS84Point();
-			wgs84.setLat(latlng[0]);
-			wgs84.setLong(latlng[1]);
-			wgs84pointMap.put(subjectUri, wgs84);			
-			//System.out.println( PrintUtil.print(subjectUri + ": " +  latlng[0] + ", " + latlng[1] ) );
-		}		
+		if(utmPointMap != null) {
+			wgs84pointMap = new HashMap<String,WGS84Point>();	
+			Set subjectUriSet = utmPointMap.keySet();
+			Iterator<String> iutmPoint = subjectUriSet.iterator();
+			while(iutmPoint.hasNext()) {	
+				String subjectUri = iutmPoint.next();
+				String utm = utmPointMap.get(subjectUri);
+				double latlng [] = converter.utm2LatLon( utm );
+				WGS84Point wgs84 = new WGS84Point();
+				wgs84.setLat(latlng[0]);
+				wgs84.setLong(latlng[1]);
+				wgs84pointMap.put(subjectUri, wgs84);			
+				//System.out.println( PrintUtil.print(subjectUri + ": " +  latlng[0] + ", " + latlng[1] ) );
+			}
+		}
 		return wgs84pointMap;
 	}
 	/**
@@ -102,19 +104,21 @@ public class RdfCoordinatesConverter {
 	 * @param wgs84Map
 	 */
 	protected Model enrichModel(Model model, HashMap<String,WGS84Point> wgs84Map) {
-		Property wgs84lat = model.createProperty("http://www.w3.org/2003/01/geo/wgs84_pos#lat");
-		Property wgs84long = model.createProperty("http://www.w3.org/2003/01/geo/wgs84_pos#long");
-		Property wgs84geometry = model.createProperty("http://www.w3.org/2003/01/geo/wgs84_pos#geometry");
-		Set subjectUriSet = wgs84Map.keySet();
-		Iterator<String> wgs84Point = subjectUriSet.iterator();
-		while(wgs84Point.hasNext()) {	
-			String subjectUri = wgs84Point.next();
-			double latitude = wgs84Map.get(subjectUri).getLat();
-			double longitude = wgs84Map.get(subjectUri).getLong();
-			model.getResource(subjectUri).addProperty(wgs84lat, String.valueOf(latitude));
-			model.getResource(subjectUri).addProperty(wgs84long, String.valueOf(longitude));
-			String geometry = "POINT(" + String.valueOf(longitude) + " " + String.valueOf(latitude) + ")";
-			model.getResource(subjectUri).addProperty(wgs84geometry, geometry);
+		if(wgs84Map != null) {
+			Property wgs84lat = model.createProperty("http://www.w3.org/2003/01/geo/wgs84_pos#lat");
+			Property wgs84long = model.createProperty("http://www.w3.org/2003/01/geo/wgs84_pos#long");
+			Property wgs84geometry = model.createProperty("http://www.w3.org/2003/01/geo/wgs84_pos#geometry");
+			Set subjectUriSet = wgs84Map.keySet();
+			Iterator<String> wgs84Point = subjectUriSet.iterator();
+			while(wgs84Point.hasNext()) {	
+				String subjectUri = wgs84Point.next();
+				double latitude = wgs84Map.get(subjectUri).getLat();
+				double longitude = wgs84Map.get(subjectUri).getLong();
+				model.getResource(subjectUri).addProperty(wgs84lat, String.valueOf(latitude));
+				model.getResource(subjectUri).addProperty(wgs84long, String.valueOf(longitude));
+				String geometry = "POINT(" + String.valueOf(longitude) + " " + String.valueOf(latitude) + ")";
+				model.getResource(subjectUri).addProperty(wgs84geometry, geometry);
+			}
 		}
 		
 		return model;

@@ -139,8 +139,8 @@ public class SilkConfigFileParser {
     }
 
     public static void main(String[] args) throws Exception {
-        InputStream in = (SilkConfigFileParser.class).getResourceAsStream("silk-config-spatial.xml");
-        File configFile = FileUtil.inputStreamToFile(in);
+        InputStream in = (SilkConfigFileParser.class).getResourceAsStream("silk-config-test-spatial.xml");
+        File configFile = FileUtil.inputStreamToFile(in, "silk-config-", ".xml");
         File rdfFile = File.createTempFile("input-", ".ttl");
         File outFile = File.createTempFile("output-", ".ttl");
         SilkConfigFileParser parser = new SilkConfigFileParser(configFile.getAbsolutePath());

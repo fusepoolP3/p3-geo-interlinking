@@ -23,21 +23,22 @@ import eu.fusepool.p3.transformer.server.TransformerServer;
 
 public class DuplicatesTransformerTest {
 	
-	//final String SILK_CONFIG_FILE = "src/test/resources/silk-config-file.xml";
-	//final String INPUT_RDF_FILE = "src/main/resources/inputdata.ttl";
 	private byte[] rdfData;
 	private String baseUri;
 	
 	@Before
     public void setUp() throws Exception {
-		File rdfFile = FileUtil.inputStreamToFile(getClass().getResourceAsStream("spatial-data-wgs84.ttl"));
+		// prepare the data to be posted to the service
+		File rdfFile = FileUtil.inputStreamToFile(getClass().getResourceAsStream("spatial-data-wgs84.ttl"), "test-", ".ttl");
 		InputStream in = new FileInputStream(rdfFile);
         rdfData = IOUtils.toByteArray(in);
         in.close();
+        rdfFile.delete();
+        
         final int port = findFreePort();
         baseUri = "http://localhost:"+port+"/";
         TransformerServer server = new TransformerServer(port);
-        server.start(new DuplicatesTransformer());
+        server.start(new DuplicatesTransformer("silk-config-test-spatial.xml"));
     }
 
 	

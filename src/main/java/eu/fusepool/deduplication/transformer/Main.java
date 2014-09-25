@@ -36,7 +36,7 @@ public class Main {
 
     private static void start(Arguments arguments) throws Exception {
         TransformerServer server = new TransformerServer(arguments.getPort());
-        server.start(new DuplicatesTransformer());
+        server.start(new DuplicatesTransformer("silk-confg-spatial.xml"));
         server.join();
     }
 }

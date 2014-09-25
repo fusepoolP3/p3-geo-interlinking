@@ -14,6 +14,7 @@ import de.fuberlin.wiwiss.silk.Silk;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -41,11 +42,12 @@ import org.slf4j.LoggerFactory;
 
 public class DuplicatesTransformer extends RdfGeneratingTransformer {
 
-    //final String INPUT_RDF_FILE = "src/main/resources/inputdata.rdf";
-    //final String OUTPUT_RDF_FILE = "src/main/resources/outputdata.rdf";
-    final String SILK_RESULT_FILE = "src/main/resources/accepted_links.nt";
     final String BASE_URI = "http://example.org/";
-    //private String configFileName = null;
+    private String configFileName;
+    
+    public DuplicatesTransformer(String configFilename){
+    	this.configFileName = configFilename;
+    }
 
     private static final Logger log = LoggerFactory.getLogger(DuplicatesTransformer.class);
 
@@ -67,19 +69,25 @@ public class DuplicatesTransformer extends RdfGeneratingTransformer {
     }
 
     protected TripleCollection findDuplicates(InputStream inputRdf) throws IOException {
-    	File configFile = FileUtil.inputStreamToFile(getClass().getResourceAsStream("silk-config-spatial.xml"));
+    	File configFile = FileUtil.inputStreamToFile(getClass().getResourceAsStream(configFileName), "silk-config-", ".xml");
         File inputRdfFile = File.createTempFile("input-", ".ttl");
         File wgs84File = File.createTempFile("wgs84-", ".ttl");
         File outFile = File.createTempFile("output-", ".nt");
-               
+        
+        //save the data coming from the stream into a temp file 
+        FileOutputStream outputRdfStream = new FileOutputStream(inputRdfFile);
+        IOUtils.copy(inputRdf, outputRdfStream);
+        outputRdfStream.close();
+        
         // convert utm coordinates in wgs84 and save the data in a temp file
         FileOutputStream convStream = new FileOutputStream(wgs84File);
         RdfCoordinatesConverter converter = new RdfCoordinatesConverter();
-        converter.utm2wgs84(inputRdf, convStream);
+        converter.utm2wgs84(inputRdfFile, convStream);
         log.info("Finished conversion in WGS84");
         
         //update the silk config file with the paths of the target source and output files
-        SilkConfigFileParser parser = new SilkConfigFileParser(configFile.getAbsolutePath());
+        String configAbsolutePath = configFile.getAbsolutePath();
+        SilkConfigFileParser parser = new SilkConfigFileParser(configAbsolutePath);
         parser.updateSourceFile(wgs84File.getAbsolutePath());
         parser.updateOutputFile(outFile.getAbsolutePath());
 		parser.saveChanges();
@@ -87,17 +95,9 @@ public class DuplicatesTransformer extends RdfGeneratingTransformer {
         // interlink entities
         Silk.executeFile(configFile, null, 1, true);
         log.info("Finished Silk Task");
-        //----start test code
-        /*
-         MGraph inputGraph = new SimpleMGraph();
-         ParsingProvider parser = new JenaParserProvider();
-         parser.parse(inputGraph, inputRdf, SupportedFormat.TURTLE, null);
-         Silk.executeTripleCollection(inputGraph);
-         */
-        //---end test code
-
+        
         // returns the result to the client
-        return parseResult(SILK_RESULT_FILE);
+        return parseResult(outFile.getAbsolutePath());
     }
 
     /**
@@ -146,15 +146,8 @@ public class DuplicatesTransformer extends RdfGeneratingTransformer {
      * @throws IOException
      */
     public TripleCollection parseResult(String fileName) throws IOException {
-        final TripleCollection links = new SimpleMGraph();
-        BufferedReader in = new BufferedReader(new FileReader(fileName));
-        String statement;
-        while ((statement = in.readLine()) != null) {
-            Triple link = new TripleImpl(getSubject(statement), OWL.sameAs, getObject(statement));
-            links.add(link);
-        }
-        in.close();
-        return links;
+    	Parser parser = Parser.getInstance();
+        return parser.parse(new FileInputStream(fileName), SupportedFormat.N_TRIPLE);
     }
 
     public UriRef getSubject(String statement) {

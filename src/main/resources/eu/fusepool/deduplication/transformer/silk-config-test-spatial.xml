@@ -1,0 +1,66 @@
+<Silk>
+    <Prefixes>
+        <Prefix namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" id="rdf"></Prefix>     
+        <Prefix namespace="http://www.w3.org/2001/XMLSchema#" id="xsd"></Prefix>
+        <Prefix namespace="http://www.w3.org/2000/01/rdf-schema#" id="rdfs"></Prefix>
+        <Prefix namespace="http://www.w3.org/2002/07/owl#" id="owl"></Prefix>
+        <Prefix namespace="http://www.w3.org/2003/01/geo/wgs84_pos#" id="geo"></Prefix>        
+        <Prefix namespace="http://airports.dataincubator.org/" id="airports"></Prefix>
+    </Prefixes>
+    <DataSources>
+        <DataSource id="source" type="file">
+            <Param name="file" value="spatial-data-wgs84.ttl"></Param>
+            <Param name="format" value="TURTLE"></Param>
+        </DataSource>
+        <DataSource id="target" type="file">
+            <Param name="file" value="spatial-data-wgs84.ttl"></Param>
+            <Param name="format" value="TURTLE"></Param>
+        </DataSource>  
+    </DataSources>
+    <Blocking blocks="10" />
+    <Interlinks>
+        <Interlink id="airports">
+            <LinkType>owl:sameAs</LinkType>
+            <SourceDataset dataSource="source" var="s_airport">
+                <RestrictTo>
+                    ?s_airport rdf:type airports:LargeAirport . 
+                </RestrictTo>
+            </SourceDataset>
+            <TargetDataset dataSource="target" var="t_airport">
+                <RestrictTo>
+                    ?t_airport rdf:type airports:LargeAirport .
+                </RestrictTo>
+            </TargetDataset>
+            <LinkageRule>
+                <Aggregate type="average">
+                    <Compare metric="wgs84" required="true">
+                        <TransformInput function="concat">
+                            <Input path="?s_airport/geo:lat" />
+                            <Input path="?s_airport/geo:long" />   
+                            <Param name="glue" value=" " />                                     
+                        </TransformInput>
+                        <TransformInput function="concat">
+                            <Input path="?t_airport/geo:lat" />
+                            <Input path="?t_airport/geo:long" />
+                            <Param name="glue" value=" " />                                        
+                        </TransformInput>
+                        <Param name="unit" value="m" />
+                        <Param name="threshold" value="100" />
+                        <Param name="curveStyle" value="linear" />
+                    </Compare>
+                </Aggregate>
+            </LinkageRule>
+            <Filter threshold="0.90"></Filter>
+            <Outputs>
+                <Output type="file" minConfidence="0.90">
+                    <Param name="file" value="accepted_links.nt" />
+                    <Param name="format" value="ntriples" />
+                </Output>
+				            
+            </Outputs>
+        </Interlink>
+    </Interlinks>
+</Silk>
+
+
+
