@@ -7,10 +7,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
+import java.util.Iterator;
 
+import org.apache.clerezza.rdf.core.BNode;
+import org.apache.clerezza.rdf.core.Graph;
+import org.apache.clerezza.rdf.core.Resource;
+import org.apache.clerezza.rdf.core.Triple;
+import org.apache.clerezza.rdf.core.serializedform.Parser;
+import org.apache.clerezza.rdf.ontologies.OWL;
+import org.apache.clerezza.rdf.ontologies.RDF;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpStatus;
 import org.hamcrest.core.StringContains;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +28,7 @@ import com.jayway.restassured.response.Response;
 
 import eu.fusepool.deduplication.transformer.FileUtil;
 import eu.fusepool.deduplication.transformer.DuplicatesTransformer;
+import eu.fusepool.p3.transformer.sample.SimpleTransformer;
 import eu.fusepool.p3.transformer.server.TransformerServer;
 
 public class DuplicatesTransformerTest {
@@ -51,16 +61,9 @@ public class DuplicatesTransformerTest {
         .expect().statusCode(HttpStatus.SC_OK).content(new StringContains("http://www.w3.org/2002/07/owl#sameAs")).header("Content-Type", "text/turtle").when()
         .post(baseUri);
 
-		
-		
-		/*
-        Graph graph = Parser.getInstance().parse(response.getBody().asInputStream(), "text/turtle");
-        Iterator<Triple> typeTriples = graph.filter(null, RDF.type, 
-                SimpleTransformer.TEXUAL_CONTENT);
-        Assert.assertTrue("No type triple found", typeTriples.hasNext());
-        Resource textDescription = typeTriples.next().getSubject();
-        Assert.assertTrue("TextDescription resource is not a BNode", textDescription instanceof BNode);
-        */
+		Graph graph = Parser.getInstance().parse(response.getBody().asInputStream(), "text/turtle");
+        Iterator<Triple> typeTriples = graph.filter(null, OWL.sameAs, null);
+        Assert.assertTrue("No equivalent entities found", typeTriples.hasNext());
 		
 	}
 	

@@ -63,6 +63,13 @@ public class DuplicatesTransformer extends RdfGeneratingTransformer {
         return duplicates;
     }
 
+    /**
+     * Finds duplicates between a source graph and a target graph. The Silk configuration file is updated with the current source and output file paths. 
+     * The updated configuration file and the input RDF data and the output files are stored in the /tmp/ folder.
+     * @param inputRdf
+     * @return
+     * @throws IOException
+     */
     protected TripleCollection findDuplicates(InputStream inputRdf) throws IOException {
     	File configFile = FileUtil.inputStreamToFile(getClass().getResourceAsStream(configFileName), "silk-config-", ".xml");
         File inputRdfFile = File.createTempFile("input-", ".ttl");
