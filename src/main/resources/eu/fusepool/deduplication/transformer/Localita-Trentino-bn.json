@@ -1,0 +1,1240 @@
+[
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "COMU",
+          "rdfTypes": [],
+          "links": []
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": []
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://dbpedia.org/ontology/area",
+              "curie": "dbont:area",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "AREA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://dbpedia.org/ontology/area",
+              "curie": "dbont:area",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "AREA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://dbpedia.org/ontology/area",
+              "curie": "dbont:area",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "AREA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/point/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'POINT (' + value + ',' + cells[\"Y_COORD\"].value + ')'",
+                      "isRowNumberCell": false,
+                      "columnName": "X_COORD"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://dbpedia.org/ontology/area",
+              "curie": "dbont:area",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "AREA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/point/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'POINT (' + value + ',' + cells[\"Y_COORD\"].value + ')'",
+                      "isRowNumberCell": false,
+                      "columnName": "X_COORD"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://dbpedia.org/ontology/area",
+              "curie": "dbont:area",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "AREA"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/poly/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "WKT"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/point/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'ETRS89 POINT (' + value + ',' + cells[\"Y_COORD\"].value + ')'",
+                      "isRowNumberCell": false,
+                      "columnName": "X_COORD"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://dbpedia.org/ontology/area",
+              "curie": "dbont:area",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "AREA"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/poly/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'ETRS89 ' + value",
+                      "isRowNumberCell": false,
+                      "columnName": "WKT"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "'/loc/' + value",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/point/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'ETRS89 POINT (' + value + ',' + cells[\"Y_COORD\"].value + ')'",
+                      "isRowNumberCell": false,
+                      "columnName": "X_COORD"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://dbpedia.org/ontology/area",
+              "curie": "dbont:area",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "AREA"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'/loc/geometry/poly/' + value",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'ETRS89 ' + value",
+                      "isRowNumberCell": false,
+                      "columnName": "WKT"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-blank",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-blank",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'ETRS89 POINT (' + value + ',' + cells[\"Y_COORD\"].value + ')'",
+                      "isRowNumberCell": false,
+                      "columnName": "X_COORD"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://dbpedia.org/ontology/area",
+              "curie": "dbont:area",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "AREA"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-blank",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'ETRS89 ' + value",
+                      "isRowNumberCell": false,
+                      "columnName": "WKT"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://fusepool.eu/",
+      "prefixes": [
+        {
+          "name": "schema",
+          "uri": "http://schema.org/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "dbont",
+          "uri": "http://dbpedia.org/ontology"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "gs",
+          "uri": "http://www.opengis.net/ont/geosparql"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-blank",
+          "isRowNumberCell": false,
+          "columnName": "AMMLOC_ID",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Place",
+              "curie": "schema:Place"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "DENO"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-blank",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'ETRS89 POINT (' + value + ',' + cells[\"Y_COORD\"].value + ')'",
+                      "isRowNumberCell": false,
+                      "columnName": "X_COORD"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://dbpedia.org/ontology/area",
+              "curie": "dbont:area",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "AREA"
+              }
+            },
+            {
+              "uri": "http://www.opengis.net/ont/geosparql#hasGeometry",
+              "curie": "gs:hasGeometry",
+              "target": {
+                "nodeType": "cell-as-blank",
+                "isRowNumberCell": false,
+                "columnName": "AMMLOC_ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#Geometry",
+                    "curie": "gs:Geometry"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.opengis.net/ont/geosparql#asWKT",
+                    "curie": "gs:asWKT",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'ETRS89 ' + value",
+                      "isRowNumberCell": false,
+                      "columnName": "WKT"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
